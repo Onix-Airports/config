@@ -1,8 +1,29 @@
 {
-  "name": "@onix/config",
-  "private": true,
+  "description": "Shared TypeScript presets for Onix projects",
   "devDependencies": {
     "@types/node": "^25.3.2",
     "typescript": "^5.9.3"
-  }
+  },
+  "exports": {
+    "./tsconfig.base": "./tsconfig.base.json",
+    "./tsconfig.nestjs": "./tsconfig.nestjs.json",
+    "./tsconfig.nextjs": "./tsconfig.nextjs.json",
+    "./tsconfig.node": "./tsconfig.node.json",
+    "./tsconfig.reactjs": "./tsconfig.reactjs.json"
+  },
+  "files": [
+    "tsconfig.base.json",
+    "tsconfig.reactjs.json",
+    "tsconfig.nextjs.json",
+    "tsconfig.node.json",
+    "tsconfig.nestjs.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "name": "@onixairports/config",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0"
 }
