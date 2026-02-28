@@ -42,8 +42,15 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          echo "NPM_TOKEN provided: yes"
+          echo "NPM_TOKEN length: ${#NPM_TOKEN}"
+          if [[ "$NPM_TOKEN" == npm_* ]]; then
+            echo "NPM_TOKEN prefix looks valid (npm_)"
+          else
+            echo "NPM_TOKEN prefix does not look like npm token"
+          fi
           npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
-          npm config set always-auth true
+          echo "npm userconfig: $(npm config get userconfig)"
           npm whoami
 
       - name: Release
