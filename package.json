@@ -1,7 +1,14 @@
 {
   "description": "Shared TypeScript presets for Onix projects",
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.6",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.1.0",
     "@types/node": "^25.3.2",
+    "semantic-release": "^24.2.9",
     "typescript": "^5.9.3"
   },
   "exports": {
@@ -24,6 +31,10 @@
   "name": "@onixairports/config",
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run"
   },
   "version": "1.0.0"
 }
