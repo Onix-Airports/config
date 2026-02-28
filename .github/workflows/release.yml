@@ -9,14 +9,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     permissions:
       contents: write
-      issues: write
-      pull-requests: write
-      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,27 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate NPM token presence
-        run: |
-          if [ -z "$NPM_TOKEN" ]; then
-            echo "NPM_TOKEN secret is missing or empty"
-            exit 1
-          fi
-
-      - name: Configure npm authentication
-        run: |
-          echo "NPM_TOKEN provided: yes"
-          echo "NPM_TOKEN length: ${#NPM_TOKEN}"
-          if [[ "$NPM_TOKEN" == npm_* ]]; then
-            echo "NPM_TOKEN prefix looks valid (npm_)"
-          else
-            echo "NPM_TOKEN prefix does not look like npm token"
-          fi
-          npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
-          echo "npm userconfig: $(npm config get userconfig)"
-          npm whoami
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
